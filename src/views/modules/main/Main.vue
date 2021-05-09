@@ -1,175 +1,160 @@
 <template>
   <div class="main-page-calc">
+    <!-- Left block - вынести потом в отдельные компоненты -->
+    <div class="main-page-calc__left-block">
+      <InterestRate />
+      <PropertyValue />
+      <DownPayment />
+      <CreditTermValue />
 
-
-
-
-  <!-- Left block - вынести потом в отдельные компоненты -->
-  <div class="main-page-calc__left-block">  
-
-    <!--Процентная ставка  -->
-    <div class="interest-rate">
-      <p class="interest-rate__title">Процентная ставка</p>
-      <p class="interest-rate__visual-value">{{interestRate}}% </p>
-      <input class="interest-rate__input-line" type="range" min="0" max="40" step="0.1" v-model.number.trim ="interestRate"> 
-      <input class="interest-rate__input-text" type="number" v-model.number.trim="interestRate">
-    </div> 
-    <!--Процентная ставка *** -->
-
-
-
-
-<!-- Cтоимость недвижимости -->
-  <div class="total-cost" v-for="(item, index) in totalCostData" :key="index">
-    <p class="total-cost__title">Стоимость недвижимости</p>
-    <p class="total-cost__visual-value">{{totalCostValue}} руб.</p>
-    <input type="range" :min="item.min" :max="item.max" v-model="totalCostValue" :step="item.step" >
-    <input type="number" v-model="totalCostValue" class="total-cost__input-text">
-  </div>
- <!-- Cтоимость недвижимости ***-->   
-
-
-<!-- Первоначальный взнос -->
-  <div class="down-payment">
-    <p class="down-payment__title">Первоначальный взнос</p>
-    <p>{{downPayment}} руб.</p>
-    <input type="range" min="0" max="300000" step="1000" v-model="downPayment">
-    <input type="number" v-model="downPayment" class="down-payment__input-text">
-  </div>
-    <!-- Первоначальный взнос ***-->
-
-
-    <!-- Срок Ипотеки -->
-  <div class="credit-term-value">
-    <p class="credit-term-value__title">Срок Ипотеки/кредита</p>
-    <p>{{creditTermValue}} месяцев</p>
-    <input type="range" min="0" max="360" step="1" v-model="creditTermValue">
-    <input type="number" v-model="creditTermValue" class="credit-term-value__input-text">
-
-    <!-- радио кнопки чтобы сразу выбрать 1 год = 12 мсц выбралось и с другими -->
-    <input type="radio" id="one" value="Один" v-model="picked">
-    <label for="one">Один год</label>
-    <br>
-    <input type="radio" id="two" value="Два" v-model="picked">
-    <label for="two">Два года</label>
-    <br>
-    <span>Выбрано: {{ picked }}</span>
-  </div>
-        <!-- Срок Ипотеки ***-->
-
-<!-- Кнопка рассчитать Ипотеку -->
-    <button @click="result">Рассчитать</button>
-    <button @click="cleanResultCalc">Очистить</button>
-<!-- Кнопка рассчитать Ипотеку ***-->
-  </div>
+      <!-- Кнопка рассчитать Ипотеку -->
+      <button @click="result">Рассчитать</button>
+      <button @click="cleanResultCalc">Очистить</button>
+      <!-- Кнопка рассчитать Ипотеку ***-->
+    </div>
     <!-- Left block *** -->
 
-  <!-- Right block - вынести потом в отдельные компоненты -->
-    <div class="main-page-calc__right-block discription-credit">
-      <p class="discription-credit__item">ежемесячный платеж {{monthlyPayment}} руб</p>
-      <p class="discription-credit__item">процентная ставка {{interestRate}}%</p>
-      <p class="discription-credit__item">сумма кредита {{totalCostValue}} руб</p>
-      <p class="discription-credit__item">сумма кредита с переплатой {{overpaymentAmount}} руб</p>
-      <button >график платижей</button>
-  </div>
-    <!-- Right block *** -->
-
+    <!-- right-block -->
+    <RightPanel />
   </div>
 </template>
 
 <script>
-export default {
-  components:{
+// import PopupMessageError from "@/views/modules/PopupMessageError.vue";
 
+// Левая панель
+import InterestRate from "@/views/modules/main/components/interest-rate/InterestRate.vue";
+import PropertyValue from "@/views/modules/main/components/property-value/PropertyValue.vue";
+import DownPayment from "@/views/modules/main/components/down-payment/DownPayment.vue";
+import CreditTermValue from "@/views/modules/main/components/credit-term-value/CreditTermValue.vue";
+
+// правай панель
+import RightPanel from "@/views/modules/main/right-panel/RightPanel.vue";
+
+import { mapActions, mapGetters } from "vuex";
+export default {
+  components: {
+    InterestRate,
+    PropertyValue,
+    DownPayment,
+    CreditTermValue,
+    RightPanel,
   },
   data() {
     return {
       // interestRate процентная ставка
-      interestRate:0,
+      // interestRate: 0,
       // сумма кредита totalCostValue
-      totalCostValue:300000,
-
+      // totalCostValue: 0,
       // первоначальный взнос downPayment
-      downPayment:0,
-
-      totalCostData:[
-        {
-          min:0,
-          max:3000000,
-          step:1000,
-        }
-      ],
-      
-      creditTermValue:0,
-
+      // downPayment: 0,
+      // creditTermValue: 0,
       // ежемесячный платеж
-      monthlyPayment:0,
-      
+      // monthlyPayment: 0,
       //сумма с переплатой
-      overpaymentAmount:0,
-
-      picked:null
-
+      // overpaymentAmount: 0,
     };
   },
-  computed:{
-    // d() {
-      
-    //   console.log(this.totalCostValue.toLocaleString('ru-RU'))
-
-    //   return this.totalCostValue.toLocaleString('ru-RU')
-    // }
+  computed: {
+    // changeValueTotalCostValue() {
+    //   return this.changeValueAddspaceBetweenFigura(this.totalCostValue);
+    // },
+    // changeValueDownPayment() {
+    //   return this.changeValueAddspaceBetweenFigura(this.downPayment);
+    // },
+    // changeValueMonthlyPayment() {
+    //   return this.changeValueAddspaceBetweenFigura(
+    //     this.monthlyPayment.toString()
+    //   );
+    // },
+    // changeValueOverpaymentAmount() {
+    //   return this.changeValueAddspaceBetweenFigura(
+    //     this.overpaymentAmount.toString()
+    //   );
+    // },
   },
-// watch:{
-// totalCostValue:function() {
-//   // console.log(this.totalCostValue.length)
-//   if(this.totalCostValue.length > 3) {
-//     // console.log(this.totalCostValue.length - 2)
-//     // console.log(this.totalCostValue.split('').splice(2, 2, 'Orange'))
- 
-//   }
-// }
-// },
+
   methods: {
+    ...mapActions(["ACTIONS_RESULT_CALC_FORMULA"]),
+    // changeValueAddspaceBetweenFigura(valueString) {
+    //   let strValue = valueString;
+
+    //   if (strValue.length > 3) {
+    //     // строку перевожу в массив
+    //     const arrayValue = strValue.split("");
+    //     // вставляю после 3 и 6 элемента массива( с конца ) - вставляю пробел
+    //     arrayValue.splice(strValue.length - 3, 0, " ");
+
+    //     if (strValue.length > 6) {
+    //       arrayValue.splice(strValue.length - 6, 0, " ");
+    //     }
+
+    //     // возвращаю строку
+    //     strValue = arrayValue.join("");
+    //     return strValue;
+    //   }
+
+    //   return valueString;
+    // },
+
     result() {
-// __________________________________________________________________________________________
-// this.interestRate - процент годовой
-// Для примера возьмем 300 000 рублей, срок 18 месяцев и процентную ставку 15% годовых.
-// Месячная процентная ставка = 15% / 12 = 1,25%, то есть 0,0125.
-
-
-// Один процент годовой - переведенный в число
-const onePercentAnnualNumber = (this.interestRate / 12) / 100;
-// __________________________________________________________________________________________
-// формула 0,0125 × (1 + 0,0125)18 / ((1 + 0,0125)18 − 1) = 0,062385  - коэффициента аннуитета
-
-
-// считаем коэффициент аннуитета
-const annuityCoefficient = onePercentAnnualNumber * Math.pow((1 +  onePercentAnnualNumber),this.creditTermValue) / (Math.pow((1 +  onePercentAnnualNumber),this.creditTermValue) - 1);
-// __________________________________________________________________________________________
-// Теперь подставляем коэффициент аннуитета в расчет платежа:
-// 300 000 × 0,062385 = 18 715,44 Р
-
-// ежемесячный платеж,округляем
-this.monthlyPayment =  Math.round((this.totalCostValue - this.downPayment) * annuityCoefficient)
-console.log(this.monthlyPayment)
-
-// сумма с переплатой
-this.overpaymentAmount = this.monthlyPayment * this.creditTermValue
-
+      this.ACTIONS_RESULT_CALC_FORMULA();
+      // console.log();
+      // если процентная ставка = 0, если общая сумма кредита = 0 , если срок кредита = 0 мсц,
+      // то выходим и выдаем сообщение
+      // if (
+      //   this.interestRate === 0 ||
+      //   this.totalCostValue === 0 ||
+      //   this.creditTermValue === 0
+      // ) {
+      //   console.log("поля пустые");
+      //   return false;
+      // }
+      // console.log(this.interestRate.toString());
+      // __________________________________________________________________________________________
+      // this.interestRate - процент годовой
+      // Для примера возьмем 300 000 рублей, срок 18 месяцев и процентную ставку 15% годовых.
+      // Месячная процентная ставка = 15% / 12 = 1,25%, то есть 0,0125.
+      // Один процент годовой - переведенный в число
+      // const onePercentAnnualNumber = this.interestRate / 12 / 100;
+      // __________________________________________________________________________________________
+      // формула 0,0125 × (1 + 0,0125)18 / ((1 + 0,0125)18 − 1) = 0,062385  - коэффициента аннуитета
+      // считаем коэффициент аннуитета
+      // const annuityCoefficient =
+      //   (onePercentAnnualNumber *
+      //     Math.pow(1 + onePercentAnnualNumber, this.creditTermValue)) /
+      //   (Math.pow(1 + onePercentAnnualNumber, this.creditTermValue) - 1);
+      // __________________________________________________________________________________________
+      // Теперь подставляем коэффициент аннуитета в расчет платежа:
+      // 300 000 × 0,062385 = 18 715,44 Р
+      // ежемесячный платеж,округляем
+      // this.monthlyPayment = Math.round(
+      //   (this.totalCostValue - this.downPayment) * annuityCoefficient
+      // );
+      // сумма с переплатой
+      // this.overpaymentAmount = this.monthlyPayment * this.creditTermValue;
     },
 
-// очищение полей калькулятора
+    // очищение полей калькулятора
     cleanResultCalc() {
+      // // основные поля кредита
+      // this.interestRate = 0;
+      // this.totalCostValue = 0;
+      // this.downPayment = 0;
+      // this.creditTermValue = 0;
 
-    }
+      // // ежемесячный платеж и общая сумма с переплатой
+      // this.monthlyPayment = 0;
+      // this.overpaymentAmount = 0;
+      console.log(this.$store.state.interestRate);
+    },
   },
 
   filters: {
-    'go':function(value) {
-      // console.log(this.totalCostValue.toLocaleString('ru-RU'))
-      return value.toLocaleString('ru-RU')
-    }
-  }
+    // go: function (value) {
+    //   // console.log(this.totalCostValue.toLocaleString('ru-RU'))
+    //   return value.toLocaleString("ru-RU");
+    // },
+  },
 };
 </script>

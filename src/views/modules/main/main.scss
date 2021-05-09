@@ -1,0 +1,79 @@
+.main-page-calc {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    
+    &__left-block {
+    width: 48%;
+    margin-right: 25px;
+    }
+    &__right-block {
+    width: 48%;
+    border: 3px solid #30e082;
+    border-radius: 5px;
+    margin-top: 15px;
+    padding: 10px;
+    }
+    }
+    
+    // инпуты
+    .interest-rate,
+    .total-cost,
+    .down-payment,
+    .credit-term-value {
+      display: flex;
+      flex-direction: column;
+      border: 3px solid #30e082;
+      border-radius: 5px;
+      padding: 10px;
+      margin:15px 0;
+    }
+    
+          
+    .interest-rate__title,
+    .down-payment__title,
+    .total-cost__title,
+    .credit-term-value__title {
+      text-align:center;
+      margin-bottom: 10px;
+    }
+    
+    // удаление стрелочек в инпуте при type number
+    .interest-rate__input-text::-webkit-outer-spin-button,
+    .interest-rate__input-text::-webkit-inner-spin-button,
+    .down-payment__input-text::-webkit-outer-spin-button,
+    .down-payment__input-text::-webkit-inner-spin-button,
+    .total-cost__input-text::-webkit-outer-spin-button,
+    .total-cost__input-text::-webkit-inner-spin-button,
+    .credit-term-value__input-text::-webkit-outer-spin-button,
+    .credit-term-value__input-text::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    }
+    
+    // Инпут процентная ставка
+    
+    // interest-rate__input-line interest-rate__input-text
+    .interest-rate {
+    
+    &__input-line {
+    margin-bottom:10px;
+    }
+    
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // right block
+    .discription-credit__item {
+    background: pink;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    }

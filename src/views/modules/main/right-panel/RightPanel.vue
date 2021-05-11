@@ -2,7 +2,7 @@
   <!-- Right block - вынести потом в отдельные компоненты -->
   <div class="main-page-calc__right-block discription-credit">
     <p class="discription-credit__item">
-      ежемесячный платеж {{ $store.state.monthlyPayment }} руб
+      ежемесячный платеж {{ changeValueMonthlyPayment }} руб
     </p>
     <p class="discription-credit__item">
       процентная ставка {{ $store.state.interestRate }}%
@@ -11,20 +11,47 @@
       Cрок кредита {{ $store.state.creditTermValue }}
     </p>
     <p class="discription-credit__item">
-      внесли первоначальный взнос {{ $store.state.downPayment }} руб
+      внесли первоначальный взнос {{ changeValueDownPayment }} руб
     </p>
     <p class="discription-credit__item">
-      сумма кредита {{ $store.state.totalCostValue }} руб
+      сумма кредита {{ changeValueTotalCostValue }} руб
     </p>
     <p class="discription-credit__item">
-      сумма кредита с переплатой {{ $store.state.overpaymentAmount }} руб
+      сумма кредита с переплатой {{ changeValueOverpaymentAmount }} руб
     </p>
     <button>график платижей</button>
   </div>
 </template>
 
 <script>
-export default {};
+// mixins
+import mixinSpacesBetweenNumbers from "@/mixins/mixinSpacesBetweenNumbers.js";
+
+export default {
+  mixins: [mixinSpacesBetweenNumbers],
+  computed: {
+    changeValueMonthlyPayment() {
+      return this.changeValueAddspaceBetweenFigura(
+        this.$store.state.monthlyPayment.toString()
+      );
+    },
+    changeValueOverpaymentAmount() {
+      return this.changeValueAddspaceBetweenFigura(
+        this.$store.state.overpaymentAmount.toString()
+      );
+    },
+    changeValueDownPayment() {
+      return this.changeValueAddspaceBetweenFigura(
+        this.$store.state.downPayment
+      );
+    },
+    changeValueTotalCostValue() {
+      return this.changeValueAddspaceBetweenFigura(
+        this.$store.state.totalCostValue
+      );
+    },
+  },
+};
 </script>
 
 <style>

@@ -7,8 +7,14 @@
 // стили для App.vue
 @import "../scss/app/app.scss";
 
+
+
 // стили для модулей
 @import "@/views/modules/wrapper-main/wrapper-main.scss";
 @import "@/views/modules/header/header.scss";
 @import "@/views/modules/main/main.scss";
 @import "@/views/modules/payment-schedule/payment-schedule.scss";
+
+
+// MОДАЛ окна
+@import "@/views/modules/popup-message-error.scss";

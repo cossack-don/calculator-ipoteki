@@ -2,7 +2,7 @@
   <!-- Первоначальный взнос -->
   <div class="down-payment">
     <p class="down-payment__title">Первоначальный взнос</p>
-    <p>{{ $store.state.downPayment }} руб.</p>
+    <p>{{ changeValueDownPayment }} руб.</p>
     <input
       type="range"
       min="0"
@@ -19,7 +19,17 @@
 </template>
 
 <script>
-export default {};
+import mixinSpacesBetweenNumbers from "@/mixins/mixinSpacesBetweenNumbers.js";
+export default {
+  mixins: [mixinSpacesBetweenNumbers],
+  computed: {
+    changeValueDownPayment() {
+      return this.changeValueAddspaceBetweenFigura(
+        this.$store.state.downPayment
+      );
+    },
+  },
+};
 </script>
 
 <style>

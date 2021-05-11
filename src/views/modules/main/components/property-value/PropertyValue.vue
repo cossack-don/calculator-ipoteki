@@ -9,7 +9,7 @@
     >
       <p class="total-cost__title">Стоимость недвижимости</p>
       <p class="total-cost__visual-value">
-        {{ $store.state.totalCostValue }} руб.
+        {{ changeValueTotalCostValue }} руб.
       </p>
       <input
         type="range"
@@ -29,7 +29,19 @@
 </template>
 
 <script>
-export default {};
+// mixins
+import mixinSpacesBetweenNumbers from "@/mixins/mixinSpacesBetweenNumbers.js";
+
+export default {
+  mixins: [mixinSpacesBetweenNumbers],
+  computed: {
+    changeValueTotalCostValue() {
+      return this.changeValueAddspaceBetweenFigura(
+        this.$store.state.totalCostValue
+      );
+    },
+  },
+};
 </script>
 
 <style>

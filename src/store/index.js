@@ -32,22 +32,23 @@ export default new Vuex.Store({
     ],
 
     // popup-message-flag
-    PopupMessageError:false
+    PopupMessageError: false
   },
   mutations: {
     MUTATION_RESULT_CALC_FORMULA(state) {
 
       // проверка на заполненность 3-х полей, процентная ставка, срок кредита, сумма кредита.
       // Обязательны к заполнению
-            if (
-              state.interestRate === 0 ||
-              state.totalCostValue === 0 ||
-              state.creditTermValue === 0
-              ) {
-                state.PopupMessageError
-                console.log("поля пустые");
-                return false;
-              }
+      if (
+        state.interestRate === 0 ||
+        state.totalCostValue === 0 ||
+        state.creditTermValue === 0
+      ) {
+        state.PopupMessageError = true
+        return false;
+      } else {
+        state.PopupMessageError = false
+      }
 
       const onePercentAnnualNumber = state.interestRate / 12 / 100;
 
@@ -75,36 +76,28 @@ export default new Vuex.Store({
       state.monthlyPayment = 0
       state.overpaymentAmount = 0
     },
-
-    MUTATION_TOGGLE_MODAL_POPUP(state) {
-      state.PopupMessageError = ! state.PopupMessageError
-    }
   },
 
 
 
   // _________________________________________________
   actions: {
-    // ACTIONS_RESULT_CALC_FORMULA({ commit }) {
-    //   commit('MUTATION_RESULT_CALC_FORMULA');
-    // },
+    ACTIONS_RESULT_CALC_FORMULA({ commit }) {
+      commit('MUTATION_RESULT_CALC_FORMULA');
+    },
 
-    ACTIONS_TOGGLE_MODAL_POPUP({commit}) {
+    ACTIONS_ON_CLICK_BTN_CLEAN_RESULT({ commit }) {
+      commit('MUTATION_ON_CLICK_BTN_CLEAN_RESULT');
+    },
+
+    ACTIONS_TOGGLE_MODAL_POPUP({ commit }) {
       commit('MUTATION_TOGGLE_MODAL_POPUP');
     }
   },
 
 
-    // _________________________________________________
+  // _________________________________________________
   getters: {
-    // GET_RESULT_CALC_FORMULA(state) {
-      
-    //   return {
-    //     monthlyPayment:state.monthlyPayment,
-    //     overpaymentAmount:state.overpaymentAmount
-    //   };
-    // },
-
     GET_RESULT_CALC_FORMULA(state) {
       return state.PopupMessageError
     }

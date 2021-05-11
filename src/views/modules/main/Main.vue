@@ -2,6 +2,8 @@
   <div class="main-page-calc">
     <!-- Left block - вынести потом в отдельные компоненты -->
     <div class="main-page-calc__left-block">
+      <PopupMessageError v-if="GET_RESULT_CALC_FORMULA"/>
+
       <InterestRate />
       <PropertyValue />
       <DownPayment />
@@ -20,7 +22,8 @@
 </template>
 
 <script>
-// import PopupMessageError from "@/views/modules/PopupMessageError.vue";
+// модал окно
+import PopupMessageError from "@/views/modules/PopupMessageError.vue";
 
 // Левая панель
 import InterestRate from "@/views/modules/main/components/interest-rate/InterestRate.vue";
@@ -31,7 +34,7 @@ import CreditTermValue from "@/views/modules/main/components/credit-term-value/C
 // правай панель
 import RightPanel from "@/views/modules/main/right-panel/RightPanel.vue";
 
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   components: {
     InterestRate,
@@ -39,6 +42,8 @@ export default {
     DownPayment,
     CreditTermValue,
     RightPanel,
+    // popup
+    PopupMessageError
   },
   data() {
     return {
@@ -56,6 +61,7 @@ export default {
     };
   },
   computed: {
+    ...mapGetters(["GET_RESULT_CALC_FORMULA"]),
     // changeValueTotalCostValue() {
     //   return this.changeValueAddspaceBetweenFigura(this.totalCostValue);
     // },
@@ -75,7 +81,9 @@ export default {
   },
 
   methods: {
-    ...mapActions(["ACTIONS_RESULT_CALC_FORMULA"]),
+    ...mapMutations(['MUTATION_RESULT_CALC_FORMULA','MUTATION_ON_CLICK_BTN_CLEAN_RESULT']),
+    // ...mapActions(["ACTIONS_TOGGLE_MODAL_POPUP"]),
+
     // changeValueAddspaceBetweenFigura(valueString) {
     //   let strValue = valueString;
 
@@ -98,7 +106,8 @@ export default {
     // },
 
     result() {
-      this.ACTIONS_RESULT_CALC_FORMULA();
+      // this.ACTIONS_RESULT_CALC_FORMULA();
+      this.MUTATION_RESULT_CALC_FORMULA();
       // console.log();
       // если процентная ставка = 0, если общая сумма кредита = 0 , если срок кредита = 0 мсц,
       // то выходим и выдаем сообщение
@@ -137,16 +146,7 @@ export default {
 
     // очищение полей калькулятора
     cleanResultCalc() {
-      // // основные поля кредита
-      // this.interestRate = 0;
-      // this.totalCostValue = 0;
-      // this.downPayment = 0;
-      // this.creditTermValue = 0;
-
-      // // ежемесячный платеж и общая сумма с переплатой
-      // this.monthlyPayment = 0;
-      // this.overpaymentAmount = 0;
-      console.log(this.$store.state.interestRate);
+      this.MUTATION_ON_CLICK_BTN_CLEAN_RESULT()
     },
   },
 

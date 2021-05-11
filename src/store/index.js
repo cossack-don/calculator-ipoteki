@@ -30,9 +30,25 @@ export default new Vuex.Store({
         step: 1000,
       },
     ],
+
+    // popup-message-flag
+    PopupMessageError:false
   },
   mutations: {
     MUTATION_RESULT_CALC_FORMULA(state) {
+
+      // проверка на заполненность 3-х полей, процентная ставка, срок кредита, сумма кредита.
+      // Обязательны к заполнению
+            if (
+              state.interestRate === 0 ||
+              state.totalCostValue === 0 ||
+              state.creditTermValue === 0
+              ) {
+                state.PopupMessageError
+                console.log("поля пустые");
+                return false;
+              }
+
       const onePercentAnnualNumber = state.interestRate / 12 / 100;
 
       // считаем коэффициент аннуитета
@@ -47,18 +63,51 @@ export default new Vuex.Store({
       );
 
       // сумма с переплатой
-      // state.overpaymentAmount = state.monthlyPayment * state.creditTermValue;
+      state.overpaymentAmount = state.monthlyPayment * state.creditTermValue;
     },
+
+    MUTATION_ON_CLICK_BTN_CLEAN_RESULT(state) {
+      // очищение всех полей
+      state.interestRate = 0
+      state.totalCostValue = 0
+      state.creditTermValue = 0
+      state.downPayment = 0
+      state.monthlyPayment = 0
+      state.overpaymentAmount = 0
+    },
+
+    MUTATION_TOGGLE_MODAL_POPUP(state) {
+      state.PopupMessageError = ! state.PopupMessageError
+    }
   },
+
+
+
+  // _________________________________________________
   actions: {
-    ACTIONS_RESULT_CALC_FORMULA({ commit }) {
-      commit('MUTATION_RESULT_CALC_FORMULA');
-    },
+    // ACTIONS_RESULT_CALC_FORMULA({ commit }) {
+    //   commit('MUTATION_RESULT_CALC_FORMULA');
+    // },
+
+    ACTIONS_TOGGLE_MODAL_POPUP({commit}) {
+      commit('MUTATION_TOGGLE_MODAL_POPUP');
+    }
   },
+
+
+    // _________________________________________________
   getters: {
+    // GET_RESULT_CALC_FORMULA(state) {
+      
+    //   return {
+    //     monthlyPayment:state.monthlyPayment,
+    //     overpaymentAmount:state.overpaymentAmount
+    //   };
+    // },
+
     GET_RESULT_CALC_FORMULA(state) {
-      return state.monthlyPayment;
-    },
+      return state.PopupMessageError
+    }
   },
 
 })

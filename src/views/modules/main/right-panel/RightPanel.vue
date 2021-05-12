@@ -2,7 +2,11 @@
   <!-- Right block - вынести потом в отдельные компоненты -->
   <div class="main-page-calc__right-block discription-credit">
     <p class="discription-credit__item">
-      ежемесячный платеж {{ changeValueMonthlyPayment }} руб
+      ежемесячный платеж
+      <span class="discription-credit__item-span">{{
+        changeValueMonthlyPayment
+      }}</span>
+      руб
     </p>
     <p class="discription-credit__item">
       процентная ставка {{ $store.state.interestRate }}%
@@ -54,5 +58,9 @@ export default {
 };
 </script>
 
+// завести файл scss для этого компонента
 <style>
+.discription-credit__item-span {
+  color: #ffffff;
+}
 </style>

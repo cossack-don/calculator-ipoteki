@@ -2,7 +2,9 @@
   <div class="main-page-calc">
     <!-- Left block - вынести потом в отдельные компоненты -->
     <div class="main-page-calc__left-block">
-      <PopupMessageError v-if="GET_RESULT_CALC_FORMULA" />
+      <transition name="fade">
+        <PopupMessageError v-if="GET_RESULT_CALC_FORMULA" />
+      </transition>
 
       <InterestRate :class="{ warningBorder: GET_RESULT_CALC_FORMULA }" />
       <PropertyValue :class="{ warningBorder: GET_RESULT_CALC_FORMULA }" />

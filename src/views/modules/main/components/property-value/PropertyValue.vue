@@ -4,7 +4,7 @@
     <!-- Cтоимость недвижимости -->
     <div
       class="total-cost"
-      v-for="(item, index) in $store.state.totalCostData"
+      v-for="(item, index) in $store.state.totalCostDataArray"
       :key="index"
     >
       <p class="total-cost__title">Стоимость недвижимости</p>

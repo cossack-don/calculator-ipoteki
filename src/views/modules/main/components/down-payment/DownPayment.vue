@@ -1,20 +1,26 @@
 <template>
-  <!-- Первоначальный взнос -->
-  <div class="down-payment">
-    <p class="down-payment__title">Первоначальный взнос</p>
-    <p>{{ changeValueDownPayment }} руб.</p>
-    <input
-      type="range"
-      min="0"
-      max="300000"
-      step="1000"
-      v-model="$store.state.downPayment"
-    />
-    <input
-      type="number"
-      v-model="$store.state.downPayment"
-      class="down-payment__input-text global-style-input-text"
-    />
+  <div>
+    <!-- Первоначальный взнос -->
+    <div
+      class="down-payment"
+      v-for="(item, index) in $store.state.downPaymentArray"
+      :key="index"
+    >
+      <p class="down-payment__title">Первоначальный взнос</p>
+      <p>{{ changeValueDownPayment }} руб.</p>
+      <input
+        type="range"
+        :min="item.min"
+        :max="item.max"
+        :step="item.step"
+        v-model="$store.state.downPayment"
+      />
+      <input
+        type="number"
+        v-model="$store.state.downPayment"
+        class="down-payment__input-text global-style-input-text"
+      />
+    </div>
   </div>
 </template>
 

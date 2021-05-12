@@ -90,9 +90,9 @@ export default new Vuex.Store({
       commit('MUTATION_ON_CLICK_BTN_CLEAN_RESULT');
     },
 
-    ACTIONS_TOGGLE_MODAL_POPUP({ commit }) {
-      commit('MUTATION_TOGGLE_MODAL_POPUP');
-    }
+    // ACTIONS_TOGGLE_MODAL_POPUP({ commit }) {
+    //   commit('MUTATION_TOGGLE_MODAL_POPUP');
+    // }
   },
 
 

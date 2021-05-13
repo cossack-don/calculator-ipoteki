@@ -2,28 +2,42 @@
   <!-- Right block - вынести потом в отдельные компоненты -->
   <div class="main-page-calc__right-block discription-credit">
     <p class="discription-credit__item">
-      ежемесячный платеж
-      <span class="discription-credit__item-span">{{
-        changeValueMonthlyPayment
-      }}</span>
-      руб
+      Ежемесячный платеж:
+      <span class="discription-credit__item-span"
+        >{{ changeValueMonthlyPayment }} руб.</span
+      >
     </p>
     <p class="discription-credit__item">
-      процентная ставка {{ $store.state.interestRate }}%
+      Процентная ставка:
+      <span class="discription-credit__item-span"
+        >{{ $store.state.interestRate }}%</span
+      >
     </p>
     <p class="discription-credit__item">
-      Cрок кредита {{ $store.state.creditTermValue }}
+      Cрок кредита:
+      <span class="discription-credit__item-span"
+        >{{ $store.state.creditTermValue }} месяцев</span
+      >
     </p>
     <p class="discription-credit__item">
-      внесли первоначальный взнос {{ changeValueDownPayment }} руб
+      Внесли первоначальный взнос: <br />
+      <span class="discription-credit__item-span"
+        >{{ changeValueDownPayment }} руб.</span
+      >
     </p>
     <p class="discription-credit__item">
-      сумма кредита {{ changeValueTotalCostValue }} руб
+      Сумма кредита: <br />
+      <span class="discription-credit__item-span"
+        >{{ changeValueTotalCostValue }} руб.</span
+      >
     </p>
     <p class="discription-credit__item">
-      сумма кредита с переплатой {{ changeValueOverpaymentAmount }} руб
+      Сумма кредита с переплатой: <br />
+      <span class="discription-credit__item-span"
+        >{{ changeValueOverpaymentAmount }} руб.</span
+      >
     </p>
-    <button>график платижей</button>
+    <button>График платижей</button>
   </div>
 </template>
 
@@ -34,6 +48,11 @@ import mixinSpacesBetweenNumbers from "@/mixins/mixinSpacesBetweenNumbers.js";
 export default {
   mixins: [mixinSpacesBetweenNumbers],
   computed: {
+    // через v-modal возвращается число, мы можем превратить его в строку, скопировать строку в новую,
+    // старую не трогаем, а переводим в число. Новую строку возвращаем в header компонента
+    //
+    //
+    //
     changeValueMonthlyPayment() {
       return this.changeValueAddspaceBetweenFigura(
         this.$store.state.monthlyPayment.toString()
@@ -46,21 +65,18 @@ export default {
     },
     changeValueDownPayment() {
       return this.changeValueAddspaceBetweenFigura(
-        this.$store.state.downPayment
+        this.$store.state.downPayment.toString()
       );
     },
     changeValueTotalCostValue() {
       return this.changeValueAddspaceBetweenFigura(
-        this.$store.state.totalCostValue
+        this.$store.state.totalCostValue.toString()
       );
     },
   },
 };
 </script>
 
-// завести файл scss для этого компонента
+
 <style>
-.discription-credit__item-span {
-  color: #ffffff;
-}
 </style>

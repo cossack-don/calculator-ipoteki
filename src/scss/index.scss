@@ -12,7 +12,28 @@
 // стили для модулей
 @import "@/views/modules/wrapper-main/wrapper-main.scss";
 @import "@/views/modules/header/header.scss";
+// ____________________________________
+
+
+// main modules
 @import "@/views/modules/main/main.scss";
+// компонент процентная ставка 
+@import "@/views/modules/main/components/interest-rate/interest-rate.scss";
+// компонент суммма кредита
+@import "@/views/modules/main/components/property-value/property-value.scss";
+// компонент первоначальный взнос
+@import "@/views/modules/main/components/down-payment/down-payment.scss";
+// компонент срок кредита
+@import "@/views/modules/main/components/credit-term-value/credit-term-value.scss";
+
+
+// right-panel
+@import "@/views/modules/main/right-panel/right-panel.scss";
+
+// main modules ****/
+
+
+// ______________________________________________
 @import "@/views/modules/payment-schedule/payment-schedule.scss";
 
 

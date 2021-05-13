@@ -11,10 +11,16 @@
       <DownPayment />
       <CreditTermValue :class="{ warningBorder: GET_RESULT_CALC_FORMULA }" />
 
-      <!-- Кнопка рассчитать Ипотеку -->
-      <button @click="result">Рассчитать</button>
-      <button @click="cleanResultCalc">Очистить</button>
-      <!-- Кнопка рассчитать Ипотеку ***-->
+      <div class="main-page-calc__wrapper-btns">
+        <!-- Кнопка рассчитать Ипотеку -->
+        <button @click="result" class="main-page-calc__btn-result">
+          Рассчитать
+        </button>
+        <button @click="cleanResultCalc" class="main-page-calc__btn-clean">
+          Очистить
+        </button>
+        <!-- Кнопка рассчитать Ипотеку ***-->
+      </div>
     </div>
     <!-- Left block *** -->
 

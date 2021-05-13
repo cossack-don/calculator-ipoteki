@@ -110,6 +110,59 @@ export default new Vuex.Store({
 
     MUTATION_TOGGLE_MODAL_POPUP(state) {
       state.PopupMessageError = !state.PopupMessageError
+    },
+
+    MUTATION_UPDATE_INTEREST_RATE(state, value) {
+      // если максимальное число в инпуте больше max , сбрасываем к 0
+      if (value > state.interestRateArray[0].max) {
+        state.interestRate = 0
+      } else {
+        state.interestRate = value
+      }
+
+      if (value === '') {
+        state.interestRate = 0
+      }
+
+    },
+
+    MUTATION_UPDATE_TOTAL_COST_VALUE(state, value) {
+      // если максимальное число в инпуте больше max , сбрасываем к 0
+      if (value > state.totalCostDataArray[0].max) {
+        state.totalCostValue = 0
+      } else {
+        state.totalCostValue = value
+      }
+
+      if (value === '') {
+        state.totalCostValue = 0
+      }
+    },
+
+    MUTATION_UPDATE_DOWN_PAYMENT(state, value) {
+      // если максимальное число в инпуте больше max , сбрасываем к 0
+      if (value > state.downPaymentArray[0].max) {
+        state.downPayment = 0
+      } else {
+        state.downPayment = value
+      }
+
+      if (value === '') {
+        state.downPayment = 0
+      }
+    },
+
+    MUTATION_UPDATE_CREDIT_TERM_VALUE(state, value) {
+      // если максимальное число в инпуте больше max , сбрасываем к 0
+      if (value > state.creditTermValueArray[0].max) {
+        state.creditTermValue = 0
+      } else {
+        state.creditTermValue = value
+      }
+
+      if (value === '') {
+        state.creditTermValue = 0
+      }
     }
   },
 

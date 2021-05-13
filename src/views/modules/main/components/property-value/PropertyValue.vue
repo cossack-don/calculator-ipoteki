@@ -7,20 +7,24 @@
       v-for="(item, index) in $store.state.totalCostDataArray"
       :key="index"
     >
-      <p class="total-cost__title">Стоимость недвижимости</p>
-      <p class="total-cost__visual-value">
-        {{ changeValueTotalCostValue }} руб.
+      <p class="total-cost__title">
+        Cумма ипотеки/кредита {{ changeValueTotalCostValue }} руб.
       </p>
-      <input
-        type="range"
-        :min="item.min"
-        :max="item.max"
-        v-model="$store.state.totalCostValue"
-        :step="item.step"
-      />
+      <div class="total-cost__wrapper-input-line">
+        <span>min</span>
+        <input
+          class="total-cost__input-line"
+          type="range"
+          :min="item.min"
+          :max="item.max"
+          v-model.number="updateTotalCostValue"
+          :step="item.step"
+        />
+        <span>max</span>
+      </div>
       <input
         type="number"
-        v-model="$store.state.totalCostValue"
+        v-model.number="updateTotalCostValue"
         class="total-cost__input-text global-style-input-text"
       />
     </div>
@@ -37,8 +41,17 @@ export default {
   computed: {
     changeValueTotalCostValue() {
       return this.changeValueAddspaceBetweenFigura(
-        this.$store.state.totalCostValue
+        this.$store.state.totalCostValue.toString()
       );
+    },
+
+    updateTotalCostValue: {
+      get() {
+        return this.$store.state.totalCostValue;
+      },
+      set(value) {
+        this.$store.commit("MUTATION_UPDATE_TOTAL_COST_VALUE", value);
+      },
     },
   },
 };

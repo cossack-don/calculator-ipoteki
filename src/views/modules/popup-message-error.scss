@@ -1,5 +1,5 @@
 // красные рамки для инпутов, если не заполнены
-.warningBorder div {
+.warningBorder div:first-child{
     border: 3px solid #dc3545;;
     border-radius: 5px;
     padding: 10px;
@@ -12,13 +12,13 @@
     transform:translate(-50%, -50%);
 
     max-width: 400px;
-    height: 150px;
     // border: 3px solid red;
-    background: #dc3545;
+    background: rgb(63,94,251);
+    background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(134,219,174,1) 100%);
     border-radius: 5px;
-    border: 2px solid #30e082;
+    border: 3px solid #dc3545;
 
-    padding: 15px;
+    padding: 25px 15px;
     margin: 15px;
 
 
@@ -35,7 +35,11 @@
     &__list {
         list-style-type: none;
         text-align: center;
-        color: #86dbae;
+        color: #fffdfd;
+    }
+
+    &__list-item {
+        padding-bottom: 5px;
     }
 
     &__header {
@@ -46,7 +50,7 @@
         width:28px;
         height: 28px;
         cursor: pointer;
-        fill: #b4b0b0;
+        fill: #2c3e50;
         transition: 0.5s;
     }
 
@@ -58,6 +62,6 @@
     &__btn-close {
         position:absolute;
         right: -7px;
-        top: -7px;
+        top: -15px;
     }
 }

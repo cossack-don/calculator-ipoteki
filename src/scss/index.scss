@@ -1,6 +1,8 @@
 // глобальный файл на весь проект
 @import "../scss/global.scss";
 
+
+
 // глобальные переменные
 // @import "../scss/app/app.scss";
 
@@ -39,3 +41,8 @@
 
 // MОДАЛ окна
 @import "@/views/modules/popup-message-error.scss";
+
+
+
+// media запросы
+@import "../scss/media.scss";

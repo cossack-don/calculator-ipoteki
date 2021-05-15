@@ -7,7 +7,7 @@
       :key="index"
     >
       <p class="credit-term-value__title">
-        Срок ипотеки/кредита {{ updateCreditTermValue }} месяцев
+        Срок ипотеки/кредита: {{ updateCreditTermValue }} месяцев
       </p>
 
       <div class="credit-term-value__wrapper-input-line">
@@ -27,8 +27,9 @@
         v-model.number="updateCreditTermValue"
         class="credit-term-value__input-text global-style-input-text"
       />
+
+      <radioBtns />
     </div>
-    <!-- <radioBtns /> -->
   </div>
   <!-- Срок Ипотеки ***-->
 </template>

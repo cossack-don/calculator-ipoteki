@@ -8,7 +8,7 @@
       :key="index"
     >
       <p class="interest-rate__title">
-        Процентная ставка {{ updateInterestRate }}%
+        Процентная ставка: {{ updateInterestRate }}%
       </p>
 
       <div class="interest-rate__wrapper-input-line">

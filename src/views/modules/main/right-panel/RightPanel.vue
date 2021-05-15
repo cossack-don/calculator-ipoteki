@@ -2,19 +2,19 @@
   <!-- Right block - вынести потом в отдельные компоненты -->
   <div class="main-page-calc__right-block discription-credit">
     <p class="discription-credit__item">
-      Ежемесячный платеж:
+      Ежемесячный платеж: <br />
       <span class="discription-credit__item-span"
         >{{ changeValueMonthlyPayment }} руб.</span
       >
     </p>
     <p class="discription-credit__item">
-      Процентная ставка:
+      Процентная ставка: <br />
       <span class="discription-credit__item-span"
         >{{ $store.state.interestRate }}%</span
       >
     </p>
     <p class="discription-credit__item">
-      Cрок кредита:
+      Cрок кредита: <br />
       <span class="discription-credit__item-span"
         >{{ $store.state.creditTermValue }} месяцев</span
       >
@@ -37,7 +37,7 @@
         >{{ changeValueOverpaymentAmount }} руб.</span
       >
     </p>
-    <button>График платижей</button>
+    <!-- <button>График платижей</button> -->
   </div>
 </template>
 

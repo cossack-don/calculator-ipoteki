@@ -8,7 +8,7 @@
       :key="index"
     >
       <p class="total-cost__title">
-        Cумма ипотеки/кредита {{ changeValueTotalCostValue }} руб.
+        Cумма ипотеки/кредита: <br />{{ changeValueTotalCostValue }} руб.
       </p>
       <div class="total-cost__wrapper-input-line">
         <span>min</span>

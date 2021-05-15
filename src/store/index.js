@@ -37,7 +37,7 @@ export default new Vuex.Store({
     downPaymentArray: [
       {
         min: 0,
-        max: 100000,
+        max: 29000000,
         step: 1000,
       },
     ],

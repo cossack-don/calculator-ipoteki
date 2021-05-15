@@ -7,7 +7,8 @@
       :key="index"
     >
       <p class="down-payment__title">
-        Первоначальный взнос {{ changeValueDownPayment }} руб.
+        Первоначальный взнос: <br />
+        {{ changeValueDownPayment }} руб.
       </p>
 
       <div class="down-payment__wrapper-input-line">

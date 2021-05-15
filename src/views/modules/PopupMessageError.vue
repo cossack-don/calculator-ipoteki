@@ -27,8 +27,8 @@
       </div>
     </div>
     <ul class="popup-message-error__list">
-      <li class="popup-message-error__list-item">Процентную ставку</li>
-      <li class="popup-message-error__list-item">Сумма кредита</li>
+      <li class="popup-message-error__list-item">Процентную ставку,</li>
+      <li class="popup-message-error__list-item">Сумма кредита,</li>
       <li class="popup-message-error__list-item">Срок кредита</li>
     </ul>
   </div>

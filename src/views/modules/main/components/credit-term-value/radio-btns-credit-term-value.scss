@@ -1,0 +1,26 @@
+.btns-radio {
+    display: flex;
+
+    &__one-year,
+    &__five-year,
+    &__ten-year,
+    &__fifteen-year,
+    &__thirty-year
+     {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 5px;
+        width: 80px;
+        background: #86dbae;
+        margin: 5px;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    input {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    }
+}

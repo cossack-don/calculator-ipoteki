@@ -43,7 +43,7 @@ export default {
   computed: {
     updateCreditTermValue: {
       get() {
-        return this.$store.state.creditTermValue;
+        return Math.round(this.$store.state.creditTermValue);
       },
       set(value) {
         this.$store.commit("MUTATION_UPDATE_CREDIT_TERM_VALUE", value);
